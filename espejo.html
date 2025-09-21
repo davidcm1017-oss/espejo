@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espejo</title>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scaleX(-1); /* efecto espejo */
+      }
+    </style>
+  </head>
+  <body>
+    <video autoplay playsinline id="video"></video>
+    <script>
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: "user" } })
+        .then(stream => {
+          document.getElementById('video').srcObject = stream;
+        })
+        .catch(err => {
+          console.error("Error accediendo a la cámara: ", err);
+        });
+    </script>
+  </body>
+</html>
